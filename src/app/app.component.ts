@@ -25,8 +25,14 @@ export class AppComponent {
 
 
 
-   calcDateDiff(endDay: Date = new Date(2025, 1, 13)): timeComponents {
-    const dDay = endDay.valueOf();
+   calcDateDiff(): timeComponents {
+  const currentYear = new Date().getFullYear();
+  let dDay = new Date(currentYear, 1, 13).valueOf(); // February 13 of the current year
+
+  // If the current date is past this year's birthday, set the target to next year
+  if (Date.now() >= dDay) {
+    dDay = new Date(currentYear + 1, 1, 13).valueOf(); // February 13 of the next year
+  }
 
 
     const milliSecondsInASecond = 1000;
